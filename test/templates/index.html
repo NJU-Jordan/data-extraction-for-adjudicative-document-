@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>初版</title>
+    <style>
+        body {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .time {
+            width: 170px;
+        }
+
+        .else {
+            text-indent: 2em;
+            font-size: 16px;
+        }
+
+        input:focus {
+            background-color: aliceblue;
+        }
+
+        textarea:focus {
+            background-color: aliceblue;
+        }
+
+        ul {
+            width: 1600px;
+            height: 20px;
+            margin: 100px auto;
+        }
+
+        .tag {
+            text-decoration: none;
+            display: block;
+            background-color: #dfdfdf;
+            text-align: center;
+            width: 100px;
+
+        }
+
+        .el {
+            height: 30px;
+
+        }
+
+        li {
+            border: burlywood;
+            list-style: none;
+            float: left;
+            text-align: center;
+        }
+
+        .box {
+            text-indent: 2em;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="center">第一版</h1>
+    <div class="else"><a href="introduce" target="blank"><h2>演示文档</h2></a></div>
+    <hr>
+    <div class="left else">
+        <a href="auto" target="_blank"><h2>自动化爬虫</h2></a>
+    </div>
+    <hr>
+    <h3 class="center">请选择其中一种方式,选择txt文件或在文本框输入后点击提交</h3>
+    <div class="left else">
+        <form method="post" enctype="multipart/form-data" action="">
+            <p><input type="file" name="file" value="上传案例文件" accept=".txt"></p>
+            <p class="center"><textarea name="content" id="" cols="200" rows="10"></textarea></p>
+            <p class="center"><input type="submit" name="submit"></p>
+        </form>
+    </div>
+    <hr>
+    <div class="left else">
+        <h2 class="center">标注</h2>
+    </div>
+    <div class="else">
+        <h2>名词</h2>
+        <h3>&emsp;&emsp;当事人</h3>
+            {% for n in namelist %}
+                <p>&emsp;&emsp;&emsp;&emsp;{{ loop.index }}.{{ n }} <a href="{{ url_for("changename",n=n) }}">移动</a></p>
+            {% endfor %}
+
+        <h3>&emsp;&emsp;性别</h3>
+            {% for n in genderlist %}
+                <p>&emsp;&emsp;&emsp;&emsp;{{ loop.index }}.{{ n }} <a href="{{ url_for("changegender",n=n) }}">移动</a></p>
+            {% endfor %}
+
+        <h3>&emsp;&emsp;民族</h3>
+            {% for n in nationlist %}
+                <p>&emsp;&emsp;&emsp;&emsp;{{ loop.index }}.{{ n }} <a href="{{ url_for("changenation",n=n) }}">移动</a></p>
+            {% endfor %}
+
+        <h3>&emsp;&emsp;出生地</h3>
+            {% for n in homelandlist %}
+                <p>&emsp;&emsp;&emsp;&emsp;{{ loop.index }}.{{ n }} <a href="{{ url_for("changehomeland",n=n) }}">移动</a></p>
+            {% endfor %}
+
+        <h3>&emsp;&emsp;案由</h3>
+            {% for n in reasonlist %}
+                <p>&emsp;&emsp;&emsp;&emsp;{{ loop.index }}.{{ n }} <a href="{{ url_for("changereason",n=n) }}">移动</a></p>
+            {% endfor %}
+
+        <h3>&emsp;&emsp;相关法院</h3>
+            {% for n in courtlist %}
+                <p>&emsp;&emsp;&emsp;&emsp;{{ loop.index }}.{{ n }} <a href="{{ url_for("changecourt",n=n) }}">移动</a></p>
+            {% endfor %}
+
+        <h3>&emsp;&emsp;其他名词</h3>
+            {% for n in other_nlist %}
+                <p>&emsp;&emsp;&emsp;&emsp;{{ loop.index }}.{{ n }} <a href="{{ url_for("deln",n=n) }}">删除</a>或添加至:
+                    <a href="{{ url_for("addname",n=n) }}">当事人</a>
+                    <a href="{{ url_for("addgender",n=n) }}">性别</a>
+                    <a href="{{ url_for("addnation",n=n) }}">民族</a>
+                    <a href="{{ url_for("addhomeland",n=n) }}">出生地</a>
+                    <a href="{{ url_for("addreason",n=n) }}">案由</a>
+                    <a href="{{ url_for("addcourt",n=n) }}">相关法院</a>
+                </p>
+            {% endfor %}
+        <h2>动词</h2>
+            {% for v in vlist %}
+                <p>&emsp;&emsp;&emsp;&emsp;{{ loop.index }}.{{ v }} <a href="{{ url_for("delv",v=v) }}">删除</a></p>
+            {% endfor %}
+
+        <h2>形容词</h2>
+            {% for adj in adjlist %}
+                <p>&emsp;&emsp;&emsp;&emsp;{{ loop.index }}.{{ adj }} <a href="{{ url_for("deladj",adj=adj) }}">删除</a></p>
+            {% endfor %}
+
+    </div>
+    <hr>
+    <div class="el box">
+        <h1 class="center">保存案件与标注</h1>
+    </div>
+    <p class="box"><h2><a href="{{ url_for("downloadtxt") }}">保存案件</a></h2></p>
+    <p class="box"><h2><a href="{{ url_for("downloadmark") }}">保存标注</a></h2></p>
+</body>
+
+</html>
